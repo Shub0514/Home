@@ -1,0 +1,68 @@
+﻿@{
+    ViewBag.Title = "stlogin";
+}
+<script>
+    $(document).ready(function () {
+        $('#log').click(function () {
+            var data = {
+                "user_name": $("#user_name").val(),
+                "password": $("#pass_word").val()
+            };
+            $.ajax({
+                url: "/Home/stlogin",
+                type: "POST",
+                data: JSON.stringify(data),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (response) {
+                    if (response === 1) {
+                        window.location.href = " @Url.Action("/dashboard")";
+                    }
+                    else {
+                        window.location.href = " @Url.Action("/stlogin")";
+                    }
+                },
+                error: function () {
+                    console.log('Login Fail!!!');
+                }
+            });
+        });
+    });
+    </script>
+
+<section class="vh-100">
+  <div class="container py-5 h-100">
+    <div class="row d-flex  h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card shadow-2-strong" style="border-radius: 1rem; width:150%;margin-right: 127px;">
+          <div class="card-body p-5 "  style="background-color: lightgray;">
+
+            <h3 class="mb-5">Sign in</h3>
+
+            <div class="form-outline mb-4">
+                <label class="form-label" for="typeEmailX-2">Username</label>
+              <input type="email" id="user_name" class="form-control form-control-lg" />
+              
+            </div>
+
+            <div class="form-outline mb-4">
+                <label class="form-label" for="typePasswordX-2">Password</label>
+              <input type="password" id="pass_word" class="form-control form-control-lg" />
+              
+            </div>
+
+            <!-- Checkbox -->
+            <div class="form-check d-flex justify-content-start mb-4">
+              
+            </div>
+
+            <button class="btn btn-primary btn-lg btn-block" id="log" type="submit">Login</button>
+
+            
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
